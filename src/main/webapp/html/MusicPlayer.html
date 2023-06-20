@@ -16,8 +16,12 @@
 
       </el-header>
       <el-container>
-        <el-aside width="300px" style="background-color: rgb(238, 241, 246)">
-
+        <el-aside width="300px" style="background-color: #202123">
+          <el-menu :default-openeds="['1']">
+            <el-submenu index="1">
+              <template solt="title"><i class="el-icon-notebook-2"></i>歌单</template>
+            </el-submenu>
+          </el-menu>
         </el-aside>
         <el-container>
           <el-main>
@@ -99,12 +103,12 @@
     }
 
     .el-header {
-      background-color: #202020;
+      background-color: #343541;
     }
 
     .el-footer {
       text-align: center;
-      background-color: #202020;
+      background-color: #444654;
     }
 
     .button {
@@ -118,7 +122,7 @@
       align-items: center;
       text-align: center;
       height: 60px;
-      color: #eee;
+      color: #d1d5db;
     }
 
     .song-title {
