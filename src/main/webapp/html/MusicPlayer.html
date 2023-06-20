@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Music Player</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <el-container>
+      <el-header>
+
+      </el-header>
+      <el-container>
+        <el-aside width="300px" style="background-color: rgb(238, 241, 246)">
+
+        </el-aside>
+        <el-container>
+          <el-main>
+
+          </el-main>
+          <el-footer height="60px">
+            <el-col :span="16">
+              <div id="infoContainer" class="info-container">
+                <div class="song-title">{{ songs[currentSongIndex].title }}</div>
+                <div class="artist-and-alnum">{{ songs[currentSongIndex].artist }} - {{ songs[currentSongIndex].album }}
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="player-container">
+                <el-button id="prevButton" class="button" type="info" icon="el-icon-arrow-left" circle
+                  @click="playPreviousSong"></el-button>
+                <audio id="audioPlayer" src="../audio/01 Wake Up, Get Up, Get Out There.flac" type="audio/flac"
+                  controls="controls" ontimeupdate="updata()"></audio>
+                <el-button id="nextButton" class="button" type="info" icon="el-icon-arrow-right" circle
+                  @click="playNextSong"></el-button>
+              </div>
+            </el-col>
+          </el-footer>
+        </el-container>
+      </el-container>
+
+    </el-container>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        //Filename Sample: "01 Wake Up, Get Up, Get Out There.flac"
+        songs: [
+          { title: 'Wake Up, Get Up, Get Out There', artist: 'Lyn', album: 'PERSONA5 オリジナル・サウンドトラック' },
+          { title: 'Phantom', artist: '目黒将司', album: 'PERSONA5 オリジナル・サウンドトラック' },
+          { title: '脱出', artist: '小西利樹', album: 'PERSONA5 オリジナル・サウンドトラック' },
+          { title: 'Life Will Change', artist: 'Lyn', album: 'PERSONA5 オリジナル・サウンドトラック' },
+          { title: '逃走~逮捕', artist: '小西利樹', album: 'PERSONA5 オリジナル・サウンドトラック' }
+        ],
+        currentSongIndex: 0
+      },
+
+      methods: {
+        playPreviousSong: function () {
+          this.currentSongIndex = (this.currentSongIndex - 1 + this.songs.length) % this.songs.length;
+          this.updateAudioSource();
+        },
+        playNextSong: function () {
+          this.currentSongIndex = (this.currentSongIndex + 1) % this.songs.length;
+          this.updateAudioSource();
+        },
+        updateAudioSource: function () {
+          var audioElement = document.querySelector('#audioPlayer');
+          audioElement.src = '../audio/' + (this.currentSongIndex + 1).toString().padStart(2, '0') + ' ' + this.songs[this.currentSongIndex].title + '.flac';
+          console.log(this.currentSongIndex);
+          console.log(this.currentSongIndex + 1);
+          console.log((this.currentSongIndex + 1).toString().padStart(2, '0'));
+          console.log(this.songs[this.currentSongIndex].title);
+          audioElement.load();
+          audioElement.play();
+        }
+      }
+    });
+
+  </script>
+
+  <style>
+    @font-face {
+      font-family: HYJunHei-35W;
+      src: url(../fonts/HYJunHei-35W.ttf);
+    }
+
+    body {
+      margin: 0;
+      font-family: HYJunHei-35W, sans-serif;
+    }
+
+    .el-header {
+      background-color: #202020;
+    }
+
+    .el-footer {
+      text-align: center;
+      background-color: #202020;
+    }
+
+    .button {
+      margin: 0 5px;
+    }
+
+    .info-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: 60px;
+      color: #eee;
+    }
+
+    .song-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
+
+    .artist-and-alnum {
+      font-size: 14px;
+    }
+
+    .player-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      height: 60px;
+    }
+  </style>
+</body>
+
+</html>
