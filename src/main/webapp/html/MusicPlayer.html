@@ -76,6 +76,10 @@
           this.currentSongIndex = (this.currentSongIndex + 1) % this.songs.length;
           this.updateAudioSource();
         },
+        playTheSong: function (int) {
+          this.currentSongIndex = int;
+          this.updateAudioSource();
+        },
         updateAudioSource: function () {
           var audioElement = document.querySelector('#audioPlayer');
           audioElement.src = '../audio/' + (this.currentSongIndex + 1).toString().padStart(2, '0') + ' ' + this.songs[this.currentSongIndex].title + '.flac';
