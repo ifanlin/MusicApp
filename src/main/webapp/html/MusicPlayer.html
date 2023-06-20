@@ -20,6 +20,14 @@
           <el-menu :default-openeds="['1']">
             <el-submenu index="1">
               <template solt="title"><i class="el-icon-notebook-2"></i>歌单</template>
+              <el-menu-item-group>
+                <template solt="title" style="font-size: 10px !important;">PERSONA5 オリジナル・サウンドトラック</template>
+                <el-menu-item index="1-1" @click="playTheSong(0)">Wake Up, Get Up, Get Out There</el-menu-item>
+                <el-menu-item index="1-1" @click="playTheSong(1)">Phantom</el-menu-item>
+                <el-menu-item index=" 1-1" @click="playTheSong(2)">脱出</el-menu-item>
+                <el-menu-item index=" 1-1" @click="playTheSong(3)">Life Will Change</el-menu-item>
+                <el-menu-item index=" 1-1" @click="playTheSong(4)">逃走~逮捕</el-menu-item>
+              </el-menu-item-group>
             </el-submenu>
           </el-menu>
         </el-aside>
@@ -27,27 +35,28 @@
           <el-main>
 
           </el-main>
-          <el-footer height="60px">
-            <el-col :span="16">
-              <div id="infoContainer" class="info-container">
-                <div class="song-title">{{ songs[currentSongIndex].title }}</div>
-                <div class="artist-and-alnum">{{ songs[currentSongIndex].artist }} - {{ songs[currentSongIndex].album }}
-                </div>
-              </div>
-            </el-col>
-            <el-col :span="8">
-              <div class="player-container">
-                <el-button id="prevButton" class="button" type="info" icon="el-icon-arrow-left" circle
-                  @click="playPreviousSong"></el-button>
-                <audio id="audioPlayer" src="../audio/01 Wake Up, Get Up, Get Out There.flac" type="audio/flac"
-                  controls="controls" ontimeupdate="updata()"></audio>
-                <el-button id="nextButton" class="button" type="info" icon="el-icon-arrow-right" circle
-                  @click="playNextSong"></el-button>
-              </div>
-            </el-col>
-          </el-footer>
-        </el-container>
+          <el-footer height=" 60px">
+                  <el-col :span="16">
+                    <div id="infoContainer" class="info-container">
+                      <div class="song-title">{{ songs[currentSongIndex].title }}</div>
+                      <div class="artist-and-alnum">{{ songs[currentSongIndex].artist }} - {{
+                        songs[currentSongIndex].album }}
+                      </div>
+                    </div>
+                  </el-col>
+                  <el-col :span="8">
+                    <div class="player-container">
+                      <el-button id="prevButton" class="button" type="info" icon="el-icon-arrow-left" circle
+                        @click="playPreviousSong"></el-button>
+                      <audio id="audioPlayer" src="../audio/01 Wake Up, Get Up, Get Out There.flac" type="audio/flac"
+                        controls="controls" ontimeupdate="updata()"></audio>
+                      <el-button id="nextButton" class="button" type="info" icon="el-icon-arrow-right" circle
+                        @click="playNextSong"></el-button>
+                    </div>
+                  </el-col>
+                  </el-footer>
       </el-container>
+    </el-container>
 
     </el-container>
   </div>
@@ -77,6 +86,7 @@
           this.updateAudioSource();
         },
         playTheSong: function (int) {
+          console.log(int);
           this.currentSongIndex = int;
           this.updateAudioSource();
         },
